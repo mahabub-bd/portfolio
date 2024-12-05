@@ -26,7 +26,7 @@ export async function postData(endpoint: string, values: any) {
 
   const response = await fetch(endpoint, {
     method: "POST",
-    mode: "no-cors",
+
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(values),
   });
