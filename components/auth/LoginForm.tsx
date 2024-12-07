@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { postData } from "@/utils/apiServices"; // Ensure this utility is implemented
+import { postData } from "@/utils/apiServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,16 +39,12 @@ export default function SignInForm() {
     setErrorMessage("");
 
     try {
-      const response = await postData(
-        "https://api.mahabub.me/auth/login",
-        values
-      );
-      console.log(response, "Api Response");
-
+      const response = await postData("auth/login",values);
       if (response.success) {
-        setSuccessMessage("Login successful!");
         form.reset();
         router.push("/dashboard");
+        setSuccessMessage("Login successful!");
+        
       } else {
         setErrorMessage(response.message || "Invalid credentials.");
       }

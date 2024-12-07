@@ -1,5 +1,5 @@
 export const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL || "https://api.mahabub.me";
+  process.env.NEXT_PUBLIC_API_URL ;
 
 // export const imagePath = (imageUrl: string): string => {
 //   return `https://api.allroundbd.com/${imageUrl}`;
@@ -49,3 +49,4 @@ export const formatDate = (isoString: any) => {
 };
 
 export { timeAgo };
+
