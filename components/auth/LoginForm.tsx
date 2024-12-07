@@ -39,12 +39,15 @@ export default function SignInForm() {
     setErrorMessage("");
 
     try {
-      const response = await postData("auth/login",values);
-      if (response.success) {
+      const response = await postData("auth/login", values);
+      console.log(response.token);
+
+      if (response.token) {
         form.reset();
+
         router.push("/dashboard");
         setSuccessMessage("Login successful!");
-        
+        console.log(response);
       } else {
         setErrorMessage(response.message || "Invalid credentials.");
       }
