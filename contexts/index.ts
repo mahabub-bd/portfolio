@@ -1,5 +1,11 @@
-import { createContext } from "react";
+import { User } from "@/types";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-const AuthContext = createContext();
+interface AuthContextType {
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
+}
 
-export { AuthContext };
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);

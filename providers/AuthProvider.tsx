@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { AuthContext } from "../contexts";
+"use client";
+import { AuthContext } from "@/contexts";
+import { User } from "@/types";
+import { ReactNode, useState } from "react";
 
-const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export { AuthProvider };
+export default AuthProvider;

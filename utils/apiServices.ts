@@ -22,8 +22,6 @@ export const apiService = async (url: string) => {
 };
 
 export async function postData(endpoint: string, values: any) {
-  console.log(`${apiUrl}/${endpoint}`);
-
   const response = await fetch(`${apiUrl}/${endpoint}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

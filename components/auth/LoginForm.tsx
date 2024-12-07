@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/useAuth";
 import { postData } from "@/utils/apiServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -19,13 +20,13 @@ import { z } from "zod";
 const signInSchema = z.object({
   email: z.string().email("Invalid email address."),
   password: z.string().min(6, "Password must be at least 6 characters."),
-  rememberMe: z.boolean().optional(),
 });
 
 export default function SignInForm() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const { user, setUser } = useAuth();
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -40,11 +41,10 @@ export default function SignInForm() {
 
     try {
       const response = await postData("auth/login", values);
-      console.log(response.token);
 
       if (response.token) {
         form.reset();
-
+        setUser(response.token);
         router.push("/dashboard");
         setSuccessMessage("Login successful!");
         console.log(response);
