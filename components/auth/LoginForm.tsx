@@ -37,7 +37,6 @@ export default function SignInForm() {
   async function onSubmit(values: z.infer<typeof signInSchema>) {
     try {
       const response = await postData("auth/login", values);
-
       if (response.token) {
         form.reset();
         setUser({
@@ -49,10 +48,12 @@ export default function SignInForm() {
         toast.success("Login successful");
         router.push("/dashboard");
       } else {
-        toast.error(response.message || "Invalid credentials.");
+        toast.error(response.message );
       }
     } catch (error: any) {
-      toast.error(error.message || "Authentication failed. Check your input.");
+   
+      
+      toast.error(error.message );
     }
   }
 

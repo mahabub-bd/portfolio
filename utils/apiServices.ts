@@ -22,15 +22,22 @@ export const apiService = async (url: string) => {
 };
 
 export async function postData(endpoint: string, values: any) {
-  const response = await fetch(`${apiUrl}/${endpoint}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(values),
-  });
+  try {
+    const response = await fetch(`${apiUrl}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
 
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.error || "API request failed.");
+ 
+    if (!response.ok) {
+      const errorData = await response.json(); 
+      throw new Error(errorData.message || "An error occurred while processing the request.");
+    }
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    throw error; 
   }
-  return data;
 }
+

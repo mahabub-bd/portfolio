@@ -43,10 +43,10 @@ export default function RegistrationForm() {
         form.reset();
         router.push("/auth/login");
       } else {
-        toast.error(response.message || "Registration failed.");
+        toast.error(response.message );
       }
     } catch (error: any) {
-      toast.error(error.message || "Registration failed. Please try again.");
+      toast.error(error.message);
     }
   }
 
