@@ -51,7 +51,7 @@ export default function SignInForm() {
           email: response.email
         });
         router.push("/dashboard");
-        setSuccessMessage("Login successful!");
+        setSuccessMessage("Login successful");
         console.log(response);
       } else {
         setErrorMessage(response.message || "Invalid credentials.");
