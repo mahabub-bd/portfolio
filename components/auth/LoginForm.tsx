@@ -13,8 +13,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { postData } from "@/utils/apiServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const signInSchema = z.object({
@@ -23,8 +23,6 @@ const signInSchema = z.object({
 });
 
 export default function SignInForm() {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const { user, setUser } = useAuth();
 
@@ -37,29 +35,24 @@ export default function SignInForm() {
   });
 
   async function onSubmit(values: z.infer<typeof signInSchema>) {
-    setErrorMessage("");
-
     try {
       const response = await postData("auth/login", values);
 
       if (response.token) {
         form.reset();
         setUser({
-          id:response.id,
+          id: response.id,
           token: response.token,
           name: response.name,
-          email: response.email
+          email: response.email,
         });
+        toast.success("Login successful");
         router.push("/dashboard");
-        setSuccessMessage("Login successful");
-        console.log(response);
       } else {
-        setErrorMessage(response.message || "Invalid credentials.");
+        toast.error(response.message || "Invalid credentials.");
       }
     } catch (error: any) {
-      setErrorMessage(
-        error.message || "Authentication failed. Check your input."
-      );
+      toast.error(error.message || "Authentication failed. Check your input.");
     }
   }
 
@@ -99,13 +92,6 @@ export default function SignInForm() {
         <Button type="submit" className="w-full">
           Login
         </Button>
-
-        {errorMessage && (
-          <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-        )}
-        {successMessage && (
-          <p className="text-green-500 text-sm mt-2">{successMessage}</p>
-        )}
       </form>
     </Form>
   );

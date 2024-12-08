@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input";
 import { postData } from "@/utils/apiServices"; // Ensure this utility is implemented
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const registrationSchema = z.object({
@@ -23,8 +23,6 @@ const registrationSchema = z.object({
 });
 
 export default function RegistrationForm() {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof registrationSchema>>({
@@ -37,23 +35,18 @@ export default function RegistrationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof registrationSchema>) {
-    setErrorMessage("");
-
     try {
-      const response = await postData("auth/register",values);
-      console.log(response, "API Response");
+      const response = await postData("auth/register", values);
 
-      if (response.success) {
-        setSuccessMessage("Registration successful! Redirecting...");
+      if (response.statusCode === 201) {
+        toast.success("Registration successful");
         form.reset();
-        router.push("/dashboard");
+        router.push("/auth/login");
       } else {
-        setErrorMessage(response.message || "Registration failed.");
+        toast.error(response.message || "Registration failed.");
       }
     } catch (error: any) {
-      setErrorMessage(
-        error.message || "Registration failed. Please try again."
-      );
+      toast.error(error.message || "Registration failed. Please try again.");
     }
   }
 
@@ -110,14 +103,6 @@ export default function RegistrationForm() {
         <Button type="submit" className="w-full">
           Register
         </Button>
-
-        {/* Error and Success Messages */}
-        {errorMessage && (
-          <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-        )}
-        {successMessage && (
-          <p className="text-green-500 text-sm mt-2">{successMessage}</p>
-        )}
       </form>
     </Form>
   );

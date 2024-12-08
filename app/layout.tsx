@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "@/providers/AuthProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
+          <Toaster/>
           <main>{children}</main>
         </AuthProvider>
       </body>
