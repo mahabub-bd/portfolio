@@ -40,10 +40,7 @@ export default function RegistrationForm() {
     setErrorMessage("");
 
     try {
-      const response = await postData(
-        "https://api.mahabub.me/auth/register",
-        values
-      );
+      const response = await postData("auth/register",values);
       console.log(response, "API Response");
 
       if (response.success) {

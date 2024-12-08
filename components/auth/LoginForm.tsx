@@ -44,7 +44,12 @@ export default function SignInForm() {
 
       if (response.token) {
         form.reset();
-        setUser(response.token);
+        setUser({
+          id:response.id,
+          token: response.token,
+          name: response.name,
+          email: response.email
+        });
         router.push("/dashboard");
         setSuccessMessage("Login successful!");
         console.log(response);
