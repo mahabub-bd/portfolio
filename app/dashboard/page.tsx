@@ -26,7 +26,7 @@ const Dashboard: FC = () => {
   return (
     <section className="container mx-auto min-h-screen flex justify-center items-center">
       {user ? (
-        <UserCard name={name || null} email={email || null} />
+        <UserCard name={name || "Unknown"} email={email || "Unknown"} />
       ) : (
         <LoginPrompt />
       )}
