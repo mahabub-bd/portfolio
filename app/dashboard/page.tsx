@@ -1,7 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { FC } from "react";
@@ -13,14 +19,14 @@ interface User {
 
 const Dashboard: FC = () => {
   const { user } = useAuth();
-  const { name, email } = user || {}; // Safely destructure `user`
+  const { name, email, token } = user || {};
 
-  console.log(`User Name: ${name}, User Email: ${email}`);
+  console.log(`User Name: ${name}, User Email: ${email} , Token :${token}`);
 
   return (
     <section className="container mx-auto min-h-screen flex justify-center items-center">
       {user ? (
-        <UserCard name={name || "Unknown"} email={email || "Unknown"} />
+        <UserCard name={name || null} email={email || null} />
       ) : (
         <LoginPrompt />
       )}
@@ -52,7 +58,9 @@ const UserCard: FC<UserCardProps> = ({ name, email }) => (
 
 const LoginPrompt: FC = () => (
   <div className="text-center flex flex-col gap-5 justify-center items-center">
-    <p className="text-lg font-medium">Please log in to access your dashboard.</p>
+    <p className="text-lg font-medium">
+      Please log in to access your dashboard.
+    </p>
     <Link href="/auth/login">
       <Button className="w-full max-w-xs">Login</Button>
     </Link>

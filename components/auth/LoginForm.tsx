@@ -37,23 +37,22 @@ export default function SignInForm() {
   async function onSubmit(values: z.infer<typeof signInSchema>) {
     try {
       const response = await postData("auth/login", values);
-      if (response.token) {
+
+      if (response.statusCode === 200) {
         form.reset();
         setUser({
           id: response.id,
-          token: response.token,
-          name: response.name,
-          email: response.email,
+          token: response?.data?.token,
+          name: response?.data?.name,
+          email: response?.data?.email,
         });
         toast.success("Login successful");
         router.push("/dashboard");
       } else {
-        toast.error(response.message );
+        toast.error(response.message);
       }
     } catch (error: any) {
-   
-      
-      toast.error(error.message );
+      toast.error(error.message);
     }
   }
 
