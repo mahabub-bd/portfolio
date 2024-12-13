@@ -9,21 +9,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { menuItems } from "@/constants/data";
 import { cn } from "@/lib/utils";
-
-interface MenuItem {
-  title: string;
-  href: string;
-}
-
-export const menuItems: MenuItem[] = [
-  { title: "Home", href: "/" },
-  { title: "About", href: "/about" },
-  { title: "Portfolio", href: "/portfolio" },
-  { title: "Skill", href: "/skill" },
-  { title: "Service", href: "/service" },
-  { title: "Contact", href: "/contact" },
-];
+import { MenuItem } from "@/types";
 
 export function NavigationMenuDemo() {
   return (

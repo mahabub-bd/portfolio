@@ -1,3 +1,5 @@
+import { MenuItem } from "@/types";
+
 const adminSidebarMenu = [
   {
     id: 1,
@@ -25,4 +27,14 @@ const adminSidebarMenu = [
   },
 ];
 
-export { adminSidebarMenu };
+const menuItems: MenuItem[] = [
+  { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
+  { title: "Portfolio", href: "/portfolio" },
+  { title: "Skill", href: "/skill" },
+  { title: "Blog", href: "/blog" },
+  { title: "Service", href: "/service" },
+  { title: "Contact", href: "/contact" },
+];
+
+export { adminSidebarMenu, menuItems };
