@@ -1,3 +1,4 @@
+import Header from "@/components/common/Header";
 import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "@/providers/AuthProvider";
 import type { Metadata } from "next";
@@ -32,7 +33,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Toaster/>
+          <Header />
+          <Toaster />
           <main>{children}</main>
         </AuthProvider>
       </body>
