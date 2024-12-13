@@ -17,9 +17,3 @@ export interface SingleBlog {
   likes: number;
   comments: number;
 }
-
-export interface MenuItem {
-  id: number;
-  title: string;
-  href: string;
-}

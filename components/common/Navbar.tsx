@@ -9,9 +9,21 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { menuItems } from "@/constants/data";
 import { cn } from "@/lib/utils";
-import { MenuItem } from "@/types";
+
+interface MenuItem {
+  title: string;
+  href: string;
+}
+
+export const menuItems: MenuItem[] = [
+  { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
+  { title: "Portfolio", href: "/portfolio" },
+  { title: "Skill", href: "/skill" },
+  { title: "Service", href: "/service" },
+  { title: "Contact", href: "/contact" },
+];
 
 export function NavigationMenuDemo() {
   return (
@@ -20,7 +32,7 @@ export function NavigationMenuDemo() {
         {menuItems.map((item: MenuItem) => (
           <NavigationMenuItem key={item.title}>
             <Link href={item.href} legacyBehavior passHref>
-              <NavigationMenuLink className="px-4 py-2 text-md font-medium hover:text-primary">
+              <NavigationMenuLink className="px-4 py-2 text-sm font-medium hover:text-primary">
                 {item.title}
               </NavigationMenuLink>
             </Link>
