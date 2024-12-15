@@ -5,25 +5,25 @@ const adminSidebarMenu = [
     id: 1,
     title: "Blog",
     icon: "📝",
-    href: "/admin/blog",
+    href: "/dashboard/blog",
   },
   {
     id: 2,
     title: "Portfolio",
     icon: "💼",
-    href: "/admin/portfolio",
+    href: "/dashboard/portfolio",
   },
   {
     id: 3,
     title: "Message",
     icon: "✉️",
-    href: "/admin/message",
+    href: "/dashboard/message",
   },
   {
     id: 4,
     title: "Employment",
     icon: "📋",
-    href: "/admin/employment",
+    href: "/dashboard/employment",
   },
 ];
 

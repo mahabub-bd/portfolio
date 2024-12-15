@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import Link from "next/link";
 import { FC } from "react";
 
 interface User {
@@ -19,17 +17,11 @@ interface User {
 
 const Dashboard: FC = () => {
   const { user } = useAuth();
-  const { name, email, token } = user || {};
-
-  console.log(`User Name: ${name}, User Email: ${email} , Token :${token}`);
+  const { name, email } = user;
 
   return (
     <section className="container mx-auto min-h-screen flex justify-center items-center">
-      {user ? (
-        <UserCard name={name || "Unknown"} email={email || "Unknown"} />
-      ) : (
-        <LoginPrompt />
-      )}
+      <UserCard name={name || "Unknown"} email={email || "Unknown"} />
     </section>
   );
 };
@@ -54,17 +46,6 @@ const UserCard: FC<UserCardProps> = ({ name, email }) => (
       </div>
     </CardContent>
   </Card>
-);
-
-const LoginPrompt: FC = () => (
-  <div className="text-center flex flex-col gap-5 justify-center items-center">
-    <p className="text-lg font-medium">
-      Please log in to access your dashboard.
-    </p>
-    <Link href="/auth/login">
-      <Button className="w-full max-w-xs">Login</Button>
-    </Link>
-  </div>
 );
 
 export default Dashboard;

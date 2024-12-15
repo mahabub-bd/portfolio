@@ -20,7 +20,7 @@ export function NavigationMenuDemo() {
         {menuItems.map((item: MenuItem) => (
           <NavigationMenuItem key={item.title}>
             <Link href={item.href} legacyBehavior passHref>
-              <NavigationMenuLink className="px-4 py-2 text-sm font-medium hover:text-primary">
+              <NavigationMenuLink className="px-4 py-2 text-md font-medium hover:text-primary">
                 {item.title}
               </NavigationMenuLink>
             </Link>
