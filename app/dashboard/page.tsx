@@ -10,18 +10,15 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { FC } from "react";
 
-interface User {
-  name: string;
-  email: string;
-}
-
 const Dashboard: FC = () => {
   const { user } = useAuth();
-  const { name, email } = user;
 
   return (
     <section className="container mx-auto min-h-screen flex justify-center items-center">
-      <UserCard name={name || "Unknown"} email={email || "Unknown"} />
+      <UserCard
+        name={user?.name || "Unknown"}
+        email={user?.email || "Unknown"}
+      />
     </section>
   );
 };
