@@ -13,7 +13,7 @@ import { useState } from "react";
 import BlogEditForm from "../blog/BlogEditForm";
 
 interface BlogEditActionProps {
-  id: string; // Replace with `number` if the ID is numeric
+  id: string;
 }
 
 export const BlogEditAction: React.FC<BlogEditActionProps> = ({ id }) => {

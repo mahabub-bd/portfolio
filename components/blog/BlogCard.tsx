@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import ReactImage from "@/public/react.jpg";
 import { BlogCardProps } from "@/types";
+import { formatDate } from "@/utils/helper";
 import Image from "next/image";
 
 export function BlogCard({
@@ -15,7 +16,7 @@ export function BlogCard({
   title,
   slug,
   author,
-  publishedDate,
+  createdAt,
   content,
   tags,
   thumbnailUrl,
@@ -30,7 +31,7 @@ export function BlogCard({
           {title}
         </CardTitle>
         <div className="text-sm text-gray-500 mt-1">
-          <span>{author}</span> | <span>{publishedDate}</span>
+          <span>Author: {author}</span> | <span>{formatDate(createdAt)}</span>
         </div>
         <div className="flex flex-wrap gap-2 mt-2">
           {tags.map((tag) => (

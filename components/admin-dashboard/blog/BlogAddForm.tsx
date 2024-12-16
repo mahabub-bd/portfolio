@@ -7,8 +7,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { postData } from "@/utils/apiServices";
+import { serverRevalidate } from "@/utils/revalidatePath";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const placeholders: Record<string, string> = {
@@ -61,8 +64,10 @@ export default function BlogAddForm({ isOpen }: BlogAddFormProps) {
       ...values,
       tags: updatedTags,
     };
-    console.log(updatedBlogData);
-
+    const blog = await postData("blog", updatedBlogData);
+    toast.success("Blog Create Sucessfully");
+    serverRevalidate("/dashboard/blog");
+    serverRevalidate("/blog");
     isOpen(false);
   };
 

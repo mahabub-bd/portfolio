@@ -9,7 +9,7 @@ export interface SingleBlog {
   title: string;
   slug: string;
   author: string;
-  publishedDate: string;
+  createdAt: string;
   content: string;
   tags: string[];
   thumbnailUrl: string;
@@ -35,7 +35,8 @@ export interface BlogCardProps {
   title: string;
   slug: string;
   author: string;
-  publishedDate: string;
+
+  createdAt: string;
   content: string;
   tags: string[];
   thumbnailUrl: string;

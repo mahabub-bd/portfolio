@@ -1,11 +1,13 @@
 import ReactImage from "@/public/react.jpg";
 import { SingleBlog } from "@/types";
+import { formatDate } from "@/utils/helper";
 import Image from "next/image";
 
 const BlogDetails = ({
   title,
   author,
-  publishedDate,
+
+  createdAt,
   content,
   tags,
   category,
@@ -27,9 +29,9 @@ const BlogDetails = ({
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
       <div className="flex items-center justify-between text-gray-500 text-sm mb-4">
         <span>
-          By <strong>{author}</strong>
+          Written By <strong>{author}</strong>
         </span>
-        <span>{new Date(publishedDate).toLocaleDateString()}</span>
+        <span>{formatDate(createdAt)}</span>
       </div>
       <div className="text-base leading-7 text-justify text-gray-700 mb-6">
         {content}
