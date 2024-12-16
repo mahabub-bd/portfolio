@@ -7,21 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ReactImage from "@/public/react.jpg";
+import { BlogCardProps } from "@/types";
 import Image from "next/image";
-
-interface BlogCardProps {
-  _id: string;
-  title: string;
-  slug: string;
-  author: string;
-  publishedDate: string;
-  content: string;
-  tags: string[];
-  thumbnailUrl: string;
-  category: string;
-  likes: number;
-  comments: number;
-}
 
 export function BlogCard({
   _id,
@@ -37,7 +24,7 @@ export function BlogCard({
   comments,
 }: BlogCardProps) {
   return (
-    <Card className="max-w-md shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
+    <Card className=" shadow-lg transition-transform transform  hover:shadow-2xl">
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-gray-800">
           {title}

@@ -29,15 +29,36 @@ export async function postData(endpoint: string, values: any) {
       body: JSON.stringify(values),
     });
 
- 
     if (!response.ok) {
-      const errorData = await response.json(); 
-      throw new Error(errorData.message || "An error occurred while processing the request.");
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "An error occurred while processing the request."
+      );
     }
     const data = await response.json();
-    return data; 
+    return data;
   } catch (error) {
-    throw error; 
+    throw error;
   }
 }
 
+export async function deleteDataById(endpoint: string, id: string) {
+  try {
+    const response = await fetch(`${apiUrl}/${endpoint}/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "An error occurred while deleting the item."
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
