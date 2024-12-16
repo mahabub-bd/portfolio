@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Mahabub Hossain - Frontend Developer Portfolio",
+  title: "Mahabub Hossain - Portfolio",
   description:
     "Welcome to Mahabub Hossain's personal portfolio. Explore my skills, projects, and experience as a Frontend Developer. Visit mahabub.me.",
 };
