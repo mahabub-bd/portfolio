@@ -42,6 +42,30 @@ export async function postData(endpoint: string, values: any) {
   }
 }
 
+export async function patchData(endpoint: string, id: string, values: any) {
+  try {
+    const response = await fetch(`${apiUrl}/${endpoint}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "An error occurred while updating the data."
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function deleteDataById(endpoint: string, id: string) {
   try {
     const response = await fetch(`${apiUrl}/${endpoint}/${id}`, {

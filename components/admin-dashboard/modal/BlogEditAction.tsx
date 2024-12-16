@@ -8,15 +8,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { SingleBlog } from "@/types";
 import { EditIcon } from "lucide-react";
 import { useState } from "react";
 import BlogEditForm from "../blog/BlogEditForm";
 
 interface BlogEditActionProps {
   id: string;
+  blog: SingleBlog;
 }
 
-export const BlogEditAction: React.FC<BlogEditActionProps> = ({ id }) => {
+export const BlogEditAction: React.FC<BlogEditActionProps> = ({ id, blog }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -37,7 +39,7 @@ export const BlogEditAction: React.FC<BlogEditActionProps> = ({ id }) => {
             Update the blog information below and click save when done.
           </DialogDescription>
         </DialogHeader>
-        <BlogEditForm isOpen={setOpen} />
+        <BlogEditForm isOpen={setOpen} blog={blog} />
       </DialogContent>
     </Dialog>
   );

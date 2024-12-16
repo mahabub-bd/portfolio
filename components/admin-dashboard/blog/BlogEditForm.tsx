@@ -7,8 +7,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { SingleBlog } from "@/types";
+import { patchData } from "@/utils/apiServices";
+import { serverRevalidate } from "@/utils/revalidatePath";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const placeholders: Record<string, string> = {
@@ -33,19 +37,20 @@ const blogEditSchema = z.object({
 
 interface BlogEditFormProps {
   isOpen: (value: boolean) => void;
+  blog: SingleBlog;
 }
 
-export default function BlogEditForm({ isOpen }: BlogEditFormProps) {
+export default function BlogEditForm({ isOpen, blog }: BlogEditFormProps) {
   const form = useForm<z.infer<typeof blogEditSchema>>({
     resolver: zodResolver(blogEditSchema),
     defaultValues: {
-      title: "",
-      slug: "",
-      author: "",
-      content: "",
-      tags: "",
-      thumbnailUrl: "",
-      category: "",
+      title: blog?.title,
+      slug: blog?.slug,
+      author: blog?.author,
+      content: blog?.content,
+      tags: blog?.tags?.join(", "),
+      thumbnailUrl: blog?.thumbnailUrl,
+      category: blog?.category,
     },
   });
 
@@ -61,12 +66,18 @@ export default function BlogEditForm({ isOpen }: BlogEditFormProps) {
       ...values,
       tags: updatedTags,
     };
+
+    const updateBlog = await patchData("blog", blog._id, updatedBlogData);
+    toast.success("Blog Edited Sucessfully");
+    serverRevalidate("/dashboard/blog");
+    serverRevalidate("/blog");
     isOpen(false);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        {/* Other fields remain the same */}
         <FormField
           control={form.control}
           name="title"
@@ -171,7 +182,7 @@ export default function BlogEditForm({ isOpen }: BlogEditFormProps) {
             </FormItem>
           )}
         />
-        {/** Action Buttons */}
+        {/* Action Buttons */}
         <div className="flex justify-between gap-10">
           <Button
             onClick={() => isOpen(false)}

@@ -15,7 +15,7 @@ export default async function BlogList() {
 
       <div className="grid grid-cols-1 gap-4">
         {blogs.map((blog: any) => (
-          <BlogListItem key={blog?._id} {...blog} />
+          <BlogListItem key={blog?._id} blog={blog} />
         ))}
       </div>
     </section>

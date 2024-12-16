@@ -1,23 +1,26 @@
 "use client";
 import { ReactImage } from "@/public";
-import { BlogCardProps } from "@/types";
+import { SingleBlog } from "@/types";
 import { formatDate } from "@/utils/helper";
 import Image from "next/image";
 import BlogAction from "./BlogAction";
-
-export function BlogListItem({
-  _id,
-  title,
-  slug,
-  author,
-  createdAt,
-  content,
-  tags,
-  thumbnailUrl,
-  category,
-  likes,
-  comments,
-}: BlogCardProps) {
+interface BlogListItemProps {
+  blog: SingleBlog;
+}
+export function BlogListItem({ blog }: BlogListItemProps) {
+  const {
+    _id,
+    title,
+    slug,
+    author,
+    createdAt,
+    content,
+    tags,
+    thumbnailUrl,
+    category,
+    likes,
+    comments,
+  } = blog;
   return (
     <div className="flex items-start gap-4 p-4 border-b border-gray-300">
       <Image
@@ -37,7 +40,7 @@ export function BlogListItem({
         <p className="mt-2 text-gray-700 text-sm line-clamp-2">{content}</p>
       </div>
 
-      <BlogAction id={_id} />
+      <BlogAction id={_id} blog={blog} />
     </div>
   );
 }

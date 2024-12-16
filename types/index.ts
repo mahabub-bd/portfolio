@@ -47,4 +47,5 @@ export interface BlogCardProps {
 
 export interface BlogActionProps {
   id: string;
+  blog?: SingleBlog;
 }
