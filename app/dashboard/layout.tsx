@@ -4,7 +4,7 @@ import SideMenu from "@/components/admin-dashboard/SideMenu";
 import { useAuth } from "@/hooks/useAuth";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function DashboardLayout({
   children,
@@ -13,13 +13,20 @@ export default function DashboardLayout({
 }) {
   const { user } = useAuth();
   const router = useRouter();
-  const token = Cookies.get("accessToken");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    const token = Cookies.get("accessToken");
     if (!token) {
       router.push("/auth/login");
+    } else {
+      setIsAuthenticated(true);
     }
-  }, [token, router]);
+  }, [router]);
+
+  if (!isAuthenticated) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section>
