@@ -12,6 +12,7 @@ import {
 import { menuItems } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { MenuItem } from "@/types";
+import AuthButton from "../auth/AuthBtn";
 
 export function NavigationMenuDemo() {
   return (
@@ -27,6 +28,9 @@ export function NavigationMenuDemo() {
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
+      <div className="px-10">
+        <AuthButton />
+      </div>
     </NavigationMenu>
   );
 }

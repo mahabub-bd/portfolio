@@ -17,10 +17,9 @@ export default function DashboardLayout({
 
   useEffect(() => {
     if (!token) {
-      // Redirect user to login if no token is found
       router.push("/auth/login");
     }
-  }, [token, router]); // Depend on token and router, so it runs when either changes
+  }, [token, router]);
 
   return (
     <section>
