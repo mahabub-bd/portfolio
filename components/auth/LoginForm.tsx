@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
 import { postData } from "@/utils/apiServices";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -40,12 +40,24 @@ export default function SignInForm() {
 
       if (response.statusCode === 200) {
         form.reset();
-        setUser({
-          id: response.id,
-          token: response?.data?.token,
-          name: response?.data?.name,
-          email: response?.data?.email,
-        });
+        if (response?.data?.token) {
+          Cookies.set("accessToken", response?.data?.token, {
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Strict",
+            expires: 1,
+          });
+
+          setUser({
+            id: response.data.id || "",
+            token: response.data.token,
+            name: response.data.name || "",
+            email: response.data.email || "",
+          });
+        } else {
+          console.error("No access token found");
+        }
+
         toast.success("Login successful");
         router.push("/dashboard");
       } else {

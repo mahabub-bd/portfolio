@@ -1,5 +1,4 @@
 import { apiUrl } from "./helper";
-
 export const apiService = async (url: string) => {
   const mainUrl = `${apiUrl}/${url}`;
   try {
@@ -49,6 +48,7 @@ export async function patchData(endpoint: string, id: string, values: any) {
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify(values),
     });
 

@@ -1,6 +1,8 @@
 "use client";
+
 import SideMenu from "@/components/admin-dashboard/SideMenu";
 import { useAuth } from "@/hooks/useAuth";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -11,12 +13,14 @@ export default function DashboardLayout({
 }) {
   const { user } = useAuth();
   const router = useRouter();
+  const token = Cookies.get("accessToken");
 
   useEffect(() => {
-    if (!user?.token) {
+    if (!token) {
+      // Redirect user to login if no token is found
       router.push("/auth/login");
     }
-  }, [user, router]);
+  }, [token, router]); // Depend on token and router, so it runs when either changes
 
   return (
     <section>

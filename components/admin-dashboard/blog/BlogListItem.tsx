@@ -1,10 +1,11 @@
-"use client";
-
 import { ReactImage } from "@/public";
 import { SingleBlog } from "@/types";
 import { formatDate } from "@/utils/helper";
+
+import Cookies from "js-cookie";
 import Image from "next/image";
 import BlogAction from "./BlogAction";
+const token = Cookies.get("accessToken");
 
 interface BlogListItemProps {
   blog: SingleBlog;

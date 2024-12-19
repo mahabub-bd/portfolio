@@ -8,6 +8,7 @@ const adminSidebarMenu: AdminSidebarMenuItem[] = [
   { id: 5, title: "Blog", href: "/dashboard/blog", icon: "📝" },
   { id: 6, title: "Service", href: "/dashboard/service", icon: "💡" },
   { id: 7, title: "Contact", href: "/dashboard/contact", icon: "📞" },
+  { id: 8, title: "User List", href: "/dashboard/users", icon: "👥" }, // Added User List
 ];
 
 const menuItems: MenuItem[] = [
