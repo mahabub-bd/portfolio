@@ -3,12 +3,13 @@ import { AuthContext } from "@/contexts";
 import { User } from "@/types";
 import Cookies from "js-cookie";
 import { redirect } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { FC, ReactNode, useState } from "react";
+
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const logout = () => {
@@ -18,7 +19,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext value={{ user, setUser, logout }}>{children}</AuthContext>
+    <AuthContext.Provider value={{ user, setUser, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

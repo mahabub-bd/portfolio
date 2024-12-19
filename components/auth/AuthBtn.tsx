@@ -3,6 +3,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import Cookies from "js-cookie";
 import { LogInIcon, LogOutIcon } from "lucide-react";
+import Link from "next/link";
 import { Button } from "../ui/button";
 export default function AuthButton() {
   const token = Cookies.get("accessToken");
@@ -19,13 +20,13 @@ export default function AuthButton() {
           <LogOutIcon />
         </Button>
       ) : (
-        <Button
+        <Link
           href="/auth/login"
           className="flex items-center gap-2 bg-black text-gray-50 rounded-md px-5 py-1"
         >
           Login
           <LogInIcon />
-        </Button>
+        </Link>
       )}
     </>
   );
